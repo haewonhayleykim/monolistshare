@@ -14,11 +14,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::check())
                         <li>
-                             <a href="{{ route('items.create') }}">
+                            <a href="{{ route('items.create') }}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 アイテムを追加
                             </a>
-
                         </li>
 
                         <li class="dropdown">
@@ -33,6 +32,7 @@
                                 <li>
                                     <a href="{{ route('users.show', Auth::user()->id) }}">マイページ</a>
                                 </li>
+
                                 <li role="separator" class="divider"></li>
                                 <li>
                                     <a href="{{ route('logout.get') }}">ログアウト</a>

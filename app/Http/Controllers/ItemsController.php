@@ -1,50 +1,48 @@
-<header>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Auth::check())
-                        <li>
-                            <a href="{{ route('items.create') }}">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                アイテムを追加
-                            </a>
-                        </li>
+use \App\Item;
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="gravatar">
-                                    <img src="{{ Gravatar::src(Auth::user()->email, 20) . '&d=mm' }}" alt="" class="img-circle">
-                                </span>
-                                {{ Auth::user()->name }}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="{{ route('users.show', Auth::user()->id) }}">マイページ</a>
-                                </li>
+  class ItemsController extends Controller
+  {
 
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="{{ route('logout.get') }}">ログアウト</a>
-                                </li>
-                            </ul>
-                        </li>
-                    @else
-                        <li><a href="{{ route('signup.get') }}">新規登録</a></li>
-                        <li><a href="{{ route('login') }}">ログイン</a></li>
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+    public function create()
+    {
+        $keyword = request()->keyword;
+        $items = [];
+        if ($keyword) {
+            $client = new \RakutenRws_Client();
+            $client->setApplicationId(env('RAKUTEN_APPLICATION_ID'));
+
+            $rws_response = $client->execute('IchibaItemSearch', [
+                'keyword' => $keyword,
+                'imageFlag' => 1,
+                'hits' => 20,
+            ]);
+
+            // Creating "Item" instance to make it easy to handle.（not saving）
+            foreach ($rws_response->getData()['Items'] as $rws_item) {
+                $item = new Item();
+                $item->code = $rws_item['Item']['itemCode'];
+                $item->name = $rws_item['Item']['itemName'];
+                $item->url = $rws_item['Item']['itemUrl'];
+                $item->image_url = str_replace('?_ex=128x128', '', $rws_item['Item']['mediumImageUrls'][0]['imageUrl']);
+                $items[] = $item;
+            }
+        }
+
+        return view('items.create', [
+            'keyword' => $keyword,
+            'items' => $items,
+        ]);
+    }
+    public function show($id)
+    {
+      $item = Item::find($id);
+      $want_users = $item->want_users;
+       $have_users = $item->have_users;
+
+      return view('items.show', [
+          'item' => $item,
+          'want_users' => $want_users,
+          'have_users' => $have_users,
+      ]);
+    }
+  }
