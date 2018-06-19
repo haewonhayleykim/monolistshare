@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+  use \App\Item;
 
-use \App\Item;
-
-class ItemsController extends Controller
+  class ItemsController extends Controller
   {
 
     public function create()
@@ -21,7 +20,6 @@ class ItemsController extends Controller
                 'imageFlag' => 1,
                 'hits' => 20,
             ]);
-
 
             // Creating "Item" instance to make it easy to handle.（not saving）
             foreach ($rws_response->getData()['Items'] as $rws_item) {
@@ -40,11 +38,12 @@ class ItemsController extends Controller
         ]);
     }
     
-   public function show($id)
+        public function show($id)
     {
       $item = Item::find($id);
       $want_users = $item->want_users;
-       $have_users = $item->have_users;
+      $have_users = $item->have_users;
+      
 
       return view('items.show', [
           'item' => $item,
@@ -53,4 +52,3 @@ class ItemsController extends Controller
       ]);
     }
   }
-   
