@@ -1,6 +1,11 @@
+<?php
+
+namespace App\Http\Controllers;
+
+
 use \App\Item;
 
-  class ItemsController extends Controller
+class ItemsController extends Controller
   {
 
     public function create()
@@ -16,6 +21,7 @@ use \App\Item;
                 'imageFlag' => 1,
                 'hits' => 20,
             ]);
+
 
             // Creating "Item" instance to make it easy to handle.（not saving）
             foreach ($rws_response->getData()['Items'] as $rws_item) {
@@ -33,7 +39,8 @@ use \App\Item;
             'items' => $items,
         ]);
     }
-    public function show($id)
+    
+   public function show($id)
     {
       $item = Item::find($id);
       $want_users = $item->want_users;
@@ -46,3 +53,4 @@ use \App\Item;
       ]);
     }
   }
+   
