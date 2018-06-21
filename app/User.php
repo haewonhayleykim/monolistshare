@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','point',
+        'name', 'email', 'password','point','pointday',
     ];
 
     /**
@@ -134,24 +134,31 @@ class User extends Authenticatable
     }
 }
 
-      public function incrementPoints()
+      public function incrementPoints($id)
     {
         //１．テーブルからログインユーザのポイントを取得します
         //　ユーザモデルのメソッドにアクセスします
-        $user = User::find();
+        $user = User::find($id);
+        $point = $user->point;
+        $pointday = $user->pointday;
+        $timestamp = time() ;
+        $today = date( "Y/m/d", $timestamp ) ;
         
-        //２．上で取得したポイントをインクリメント（＋１）します
-        $points = $user->point +1;
-        
-        //３．２のポイントをテーブルに保存します
-        //　ユーザモデルのメソッドにアクセスします
-        $user->point = $points;
-        print_r($user->point);
-        $user->save();
-        
+        if($pointday == $today){
+        }else{
+            //２．上で取得したポイントをインクリメント（＋１）します
+            $point = $point +1;
+            
+            //３．２のポイントをテーブルに保存します
+            //　ユーザモデルのメソッドにアクセスします
+            $user->point = $point;
+            $user->pointday = $today;
+            
+            $user->save();
+        }
         
         //４．２のポイントを戻り値として返します
-        return $points;
+        return $point;
     }
 
  

@@ -13,14 +13,12 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $points = "100";
-        $data = [];
+        $points = "0";
         $items = Item::orderBy('updated_at', 'desc')->paginate(20);
         if(\Auth::check()){
-         $user = new User;
-            //$points = incrementPoints("1");
+            $user = new User;
+            $points = $user->incrementPoints(\Auth::user()->id);
             $data = ['items' => $items,'points'=> $points]; 
-            return view('welcome',  ['points' =>$points,]);
         }
         return view('welcome',  ['points' =>$points,]);
     }
