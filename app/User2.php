@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','point',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -134,19 +133,17 @@ class User extends Authenticatable
     }
 }
 
-      public function incrementPoints()
+      public function incrementPoints($id)
     {
         //１．テーブルからログインユーザのポイントを取得します
         //　ユーザモデルのメソッドにアクセスします
-        $user = User::find();
+        $user = User::find($id);
         
         //２．上で取得したポイントをインクリメント（＋１）します
-        $points = $user->point +1;
+        $points = $user->points +1;
         
         //３．２のポイントをテーブルに保存します
         //　ユーザモデルのメソッドにアクセスします
-        $user->point = $points;
-        print_r($user->point);
         $user->save();
         
         

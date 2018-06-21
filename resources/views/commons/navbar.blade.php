@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
+                <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="Rakuten Pay"></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -27,8 +27,8 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('ranking.want') }}">Wantランキング</a></li>
-                                <li><a href="{{ route('ranking.have') }}">Haveランキング</a></li>
+                                <li><a href="{{ route('ranking.want') }}">Home</a></li>
+                                <li><a href="{{ route('ranking.have') }}">こまめな水分補給</a></li>
                             </ul>
                         </li>
 
