@@ -47,6 +47,7 @@ footer {
     background-color: #ed486f;
     border-color: #ed486f;
 }
+/* search */
 .search {
     margin-bottom: 20px;
 }
@@ -62,13 +63,14 @@ footer {
     height: 100%;
     max-width: 100%;
 }
-.item-title {
+p.item-title {
     /* Keep the number of lines in a sentence on two lines, and add "..." to the end of line. */
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
 }
+/* item */
 .item .panel-body {
     height: 120px;
 }
@@ -76,6 +78,7 @@ footer {
     display: inline-block;
     margin: 0 5px;
 }
+/* users */
 .user-profile .name {
     margin-bottom: 20px;
 }
@@ -105,4 +108,115 @@ footer {
 }
 .user-profile .status ul li .status-value {
     font-size: 18px;
+}
+
+#creditcard{
+    float:left;
+    margin-left: 25px;
+    margin-top: 50px;
+}
+
+#denshimoney{
+    float:left;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#application{
+    float:right;
+    margin-right: 25px;
+    margin-top: 50px;
+}
+
+#clearfix::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.cover2{
+    width: 100%
+}
+
+
+.zero-yen{
+    margin-top: 50px;
+}
+
+.yokujitu{
+    margin-top: 50px;
+}
+
+.appsnt{
+    font-family: "Meiryo";
+}
+
+.title{
+    font-family: "Meiryo";
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.title span{
+    color:#DD0000;
+}
+
+#smartphone{
+    float:right;
+}
+
+
+.block{
+    height: 300px;
+}
+
+.applist{
+    float: left;
+}
+
+.merit{
+    height: 400px;
+}
+
+.square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #BB0000;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #BB0000;
+    border-radius: 3px;
+    float: right;
+}
+.square_btn:active {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    border-bottom: none;/*線を消す*/
+}
+
+.square_btn2{
+    padding: 1em 3em;
+    text-decoration: none;
+    background: #BB0000;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #BB0000;
+    border-radius: 3px;
+    text-align : center ;
+    font-size:1.5em;
+    font-family: "Meiryo";
+}
+.square_btn:active {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    border-bottom: none;/*線を消す*/
+}
+
+#mousikomibutton{
+    text-align: center;
+  margin-top: 50px;
+}
+
+#zeroyenwindow{
+    margin-top: 50px;
 }
